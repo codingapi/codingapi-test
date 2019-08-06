@@ -45,7 +45,7 @@ public class XmlBuildRunner implements CommandLineRunner {
         while (iterator.hasNext()){
             Class<?> clazz=  iterator.next();
             XmlBuild xmlBuild =  clazz.getAnnotation(XmlBuild.class);
-            String filePath = xmlBuild.name()+".xml";
+            String filePath = outPath+"/"+xmlBuild.name()+".xml";
             XmlInfo xmlInfo = new XmlInfo();
             xmlInfo.setName(xmlBuild.name());
             xmlInfo.setClassName(clazz.getName());
@@ -59,11 +59,11 @@ public class XmlBuildRunner implements CommandLineRunner {
             }else{
                 xmlInfo.setInitCmd(xmlBuild.initCmd());
             }
-            
+
             Object obj = clazz.newInstance();
             xmlInfo.getList().add(obj);
 
-            File file = new File(outPath+"/"+filePath);
+            File file = new File(filePath);
             if (testConfig.getMode().equals(TestConfig.Mode.Addition)){
                 if(file.exists()){
                     return;
