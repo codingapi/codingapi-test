@@ -10,13 +10,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @description
  */
 @Data
-@ConfigurationProperties("test")
+@ConfigurationProperties("codingapi.test")
 public class TestConfig {
 
     /**
-     * 是否开启
+     * 开启模式
      */
-    private boolean coverXml;
+    private Mode mode;
 
     /**
      * 输出xml的路径
@@ -24,5 +24,23 @@ public class TestConfig {
     private String outPath;
 
 
+    public enum Mode{
+
+        /**
+         * 创建并覆盖
+         */
+        CreateAndCover,
+
+        /**
+         * 增量
+         */
+        Addition,
+
+        /**
+         * 不开启
+         */
+        OFF,
+
+    }
 
 }

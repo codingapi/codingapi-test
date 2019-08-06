@@ -25,7 +25,7 @@ import java.util.Iterator;
  * @description
  */
 @Component
-@ConditionalOnProperty(name = "test.coverXml",havingValue = "true")
+@ConditionalOnProperty(name = "codingapi.test.mode")
 @Slf4j
 public class XmlBuildRunner implements CommandLineRunner {
 
@@ -37,6 +37,10 @@ public class XmlBuildRunner implements CommandLineRunner {
         String outPath = testConfig.getOutPath();
         Iterable<Class<?>> annotated = ClassIndex.getAnnotated(XmlBuild.class);
         Iterator<Class<?>> iterator = annotated.iterator();
+
+        if (testConfig.getMode().equals(TestConfig.Mode.OFF)){
+            return;
+        }
 
         while (iterator.hasNext()){
             Class<?> clazz=  iterator.next();
@@ -67,7 +71,13 @@ public class XmlBuildRunner implements CommandLineRunner {
 
             Object obj = clazz.newInstance();
             xmlInfo.getList().add(obj);
+
             File file = new File(outPath+"/"+filePath);
+            if (testConfig.getMode().equals(TestConfig.Mode.Addition)){
+                if(file.exists()){
+                    return;
+                }
+            }
             String content = XmlUtils.create(xmlInfo);
             log.info("file:{},content->{}",file,content);
             FileUtils.writeStringToFile(file, content);
