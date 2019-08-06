@@ -40,7 +40,6 @@ public class XmlUtils {
         XmlInfo<T> xmlInfo = new XmlInfo<>();
         BeanUtils.copyProperty(xmlInfo,"initCmd",res.getInitCmd());
         BeanUtils.copyProperty(xmlInfo,"dbType",res.getDbType());
-        BeanUtils.copyProperty(xmlInfo,"path",res.getPath());
         BeanUtils.copyProperty(xmlInfo,"name",res.getName());
         BeanUtils.copyProperty(xmlInfo,"className",res.getClassName());
 

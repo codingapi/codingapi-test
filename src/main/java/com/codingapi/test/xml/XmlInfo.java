@@ -13,10 +13,7 @@ public class XmlInfo<T> {
      * 表或集合 名称
      */
     private String name;
-    /**
-     * 文件所在路径
-     */
-    private String path;
+
     /**
      * 插入数据指令
      */

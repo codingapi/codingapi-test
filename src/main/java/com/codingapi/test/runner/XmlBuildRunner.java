@@ -49,7 +49,6 @@ public class XmlBuildRunner implements CommandLineRunner {
             XmlInfo xmlInfo = new XmlInfo();
             xmlInfo.setName(xmlBuild.name());
             xmlInfo.setClassName(clazz.getName());
-            xmlInfo.setPath(filePath);
             xmlInfo.setDbType(xmlBuild.dbType());
 
             if(StringUtils.isEmpty(xmlBuild.initCmd())
