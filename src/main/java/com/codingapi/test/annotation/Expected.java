@@ -33,6 +33,6 @@ public @interface Expected {
     Type type();
 
     enum Type{
-        Int,String
+        Integer,String,Long
     }
 }

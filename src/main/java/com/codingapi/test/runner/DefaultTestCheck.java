@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * @author lorne
  * @date 2019/8/6
- * @description
+ *
  */
 @Slf4j
 public class DefaultTestCheck implements ITestCheck {
@@ -43,12 +43,18 @@ public class DefaultTestCheck implements ITestCheck {
         for(CheckMongoData checkMongoData :testMethod.checkMongoData()){
             String key = checkMongoData.primaryKey();
             String val = checkMongoData.primaryVal();
-            Object pkval = checkMongoData.type().equals(CheckMongoData.Type.Integer)?Integer.parseInt(val):val;
-            MongoTemplate mongoTemplate = applicationContext.getBean(MongoTemplate.class);
-            Query query = Query.query(
-                    Criteria.where(key).is(pkval));
-            List<Object> res = null;
+            Object pkval = val;
+            if(checkMongoData.type().equals(CheckMongoData.Type.Integer)){
+                pkval = Integer.parseInt(val);
+            }
 
+            if(checkMongoData.type().equals(CheckMongoData.Type.Long)){
+                pkval = Long.parseLong(val);
+            }
+
+            MongoTemplate mongoTemplate = applicationContext.getBean(MongoTemplate.class);
+            Query query = Query.query(Criteria.where(key).is(pkval));
+            List<Object> res = null;
             if(StringUtils.isEmpty(checkMongoData.collection())){
                 res= mongoTemplate.find(query,checkMongoData.bean());
             }else {
@@ -72,7 +78,7 @@ public class DefaultTestCheck implements ITestCheck {
                 map =  (Map<String,Object>) JSON.toJSON(val);
             }
             Object mval = map.get(expected.key());
-            if(expected.type().equals(Expected.Type.Int)){
+            if(expected.type().equals(Expected.Type.Integer)){
                 Integer _val = (Integer)mval;
                 if(Integer.parseInt(expected.value()) != _val){
                     throw new IllegalAccessException(desc);
@@ -85,6 +91,14 @@ public class DefaultTestCheck implements ITestCheck {
                     throw new IllegalAccessException(desc);
                 }
             }
+
+            if(expected.type().equals(Expected.Type.Long)){
+                Long _val = (Long)mval;
+                if(Long.parseLong(expected.value())!=_val){
+                    throw new IllegalAccessException(desc);
+                }
+            }
         }
     }
+
 }

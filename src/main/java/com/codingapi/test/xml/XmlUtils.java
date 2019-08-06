@@ -43,7 +43,6 @@ public class XmlUtils {
         BeanUtils.copyProperty(xmlInfo,"path",res.getPath());
         BeanUtils.copyProperty(xmlInfo,"name",res.getName());
         BeanUtils.copyProperty(xmlInfo,"className",res.getClassName());
-        BeanUtils.copyProperty(xmlInfo,"clearCmd",res.getClearCmd());
 
         for (Map<String,Object> map:res.getList()){
             T t = clazz.newInstance();

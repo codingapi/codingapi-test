@@ -18,7 +18,7 @@ public @interface TestMethod {
      * 是否需要导入数据
      * @return false 不需要
      */
-    boolean enablePrepare() default true;
+    boolean enablePrepare() default false;
 
     /**
      * 导入数据的xml文件名称
@@ -48,6 +48,18 @@ public @interface TestMethod {
      * 是否清理数据
      * @return false 不开启
      */
-    boolean enableClear() default true;
+    boolean enableClear() default false;
+
+    /**
+     * 清理mysql的数据库
+     * @return 清理cmd
+     */
+    String[] clearTableNames() default {};
+
+    /**
+     * 清理mongo的collect
+     * @return 清理cmd
+     */
+    String[] clearCollectionNames() default {};
 
 }

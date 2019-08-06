@@ -23,11 +23,6 @@ public class XmlInfo<T> {
     private String initCmd;
 
     /**
-     * 清理数据指令
-     */
-    private String clearCmd;
-
-    /**
      * 数据库类型
      */
     private DBType dbType;

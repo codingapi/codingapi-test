@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 public @interface CheckMysqlData {
 
     /**
-     * 检查的sql 语句 例如 select money form user where id = 10
+     * 检查的sql 语句 例如 select money from user where id = 10
      * @return sql
      */
     String sql();

@@ -59,16 +59,7 @@ public class XmlBuildRunner implements CommandLineRunner {
             }else{
                 xmlInfo.setInitCmd(xmlBuild.initCmd());
             }
-
-            if(StringUtils.isEmpty(xmlBuild.clearCmd())
-                    &&xmlBuild.dbType().equals(DBType.Mysql)){
-                String sql = SqlUtils.createClearSql(xmlBuild.name());
-                xmlInfo.setClearCmd(sql);
-            }else{
-                xmlInfo.setClearCmd(xmlBuild.clearCmd());
-            }
-
-
+            
             Object obj = clazz.newInstance();
             xmlInfo.getList().add(obj);
 

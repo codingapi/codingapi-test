@@ -57,7 +57,7 @@ public @interface CheckMongoData {
     Expected[] expected() default {};
 
     enum Type{
-        Integer,String
+        Integer,String,Long
     }
 
 }
