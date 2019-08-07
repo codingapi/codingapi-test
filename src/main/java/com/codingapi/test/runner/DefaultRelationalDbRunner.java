@@ -32,7 +32,7 @@ public class DefaultRelationalDbRunner implements IRelationalDbRunner {
         for(Object object : xmlInfo.getList()) {
             SqlUtils.SqlParam sqlParam = SqlUtils.parser(xmlInfo.getInitCmd(),object);
             Object rows = queryRunner.insert(dataSource.getConnection(), sqlParam.getSql(),new ScalarHandler<>(),sqlParam.getParams());
-            log.info("mysql->{},rows:{}",sqlParam.getSql(),rows);
+            log.info("relational ->{},rows:{}",sqlParam.getSql(),rows);
         }
     }
 
@@ -45,7 +45,7 @@ public class DefaultRelationalDbRunner implements IRelationalDbRunner {
             for (String tableName : tableNames) {
                 String sql = SqlUtils.createClearSql(tableName);
                 queryRunner.execute(dataSource.getConnection(), sql);
-                log.info("mysql truncate sql ->{}", sql);
+                log.info("relational truncate sql ->{}", sql);
             }
         }
     }
@@ -57,7 +57,7 @@ public class DefaultRelationalDbRunner implements IRelationalDbRunner {
             DataSource dataSource = applicationContext.getBean(DataSource.class);
             QueryRunner queryRunner = new QueryRunner();
             List<Map<String,Object>> res =  queryRunner.query(dataSource.getConnection(),sql,new MapListHandler());
-            log.info("mysql - check=> sql:{},res:{}",sql,res);
+            log.info("relational - check=> sql:{},res:{}",sql,res);
             Expected expecteds []= checkMysqlData.expected();
             checkVal(res,expecteds,checkMysqlData.desc());
         }

@@ -52,14 +52,16 @@ public class JunitMethodListener extends AbstractTestExecutionListener {
             return;
         }
 
-        if(testMethod.enableCheck()&&!hasException){
-            ITestCheck testCheck =  applicationContext.getBean(ITestCheck.class);
-            testCheck.check(testMethod,testContext);
-        }
-
-        if (testMethod.enableClear()) {
-            ITestClear testClear =  applicationContext.getBean(ITestClear.class);
-            testClear.clean(testMethod,testContext);
+        try {
+            if (testMethod.enableCheck() && !hasException) {
+                ITestCheck testCheck = applicationContext.getBean(ITestCheck.class);
+                testCheck.check(testMethod, testContext);
+            }
+        }finally {
+            if (testMethod.enableClear()) {
+                ITestClear testClear =  applicationContext.getBean(ITestClear.class);
+                testClear.clean(testMethod,testContext);
+            }
         }
     }
 

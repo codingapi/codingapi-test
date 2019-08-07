@@ -24,6 +24,9 @@ public interface IDbRunner {
     void check(ApplicationContext applicationContext, TestMethod testMethod) throws Exception;
 
     default void checkVal(List res , Expected[] expecteds, String desc) throws IllegalAccessException {
+        if(res==null||res.size()==0){
+            throw new IllegalAccessException(desc);
+        }
         for(int i=0;i<expecteds.length;i++){
             Expected expected = expecteds[i];
             Object val = res.get(i);
