@@ -2,10 +2,14 @@ package com.codingapi.test;
 
 import com.codingapi.test.config.TestConfig;
 import com.codingapi.test.runner.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+
+import javax.sql.DataSource;
 
 /**
  * @author lorne
@@ -41,6 +45,19 @@ public class TestConfiguration {
     @ConditionalOnMissingBean
     public ITestCheck testCheck(){
         return new DefaultTestCheck();
+    }
+
+
+    @Bean
+    @ConditionalOnClass(MongoTemplate.class)
+    public IMongoRunner mongoRunner(){
+        return new DefaultMongoRunner();
+    }
+
+    @Bean
+    @ConditionalOnClass(DataSource.class)
+    public IMysqlRunner mysqlRunner(){
+        return new DefaultMysqlRunner();
     }
 
 }
