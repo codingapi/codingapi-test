@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
-import javax.sql.DataSource;
 
 /**
  * @author lorne
@@ -49,13 +47,15 @@ public class TestConfiguration {
 
 
     @Bean
-    @ConditionalOnClass(MongoTemplate.class)
+    @ConditionalOnMissingBean
+    @ConditionalOnClass(name = "org.springframework.data.mongodb.core.MongoTemplate")
     public IMongoRunner mongoRunner(){
         return new DefaultMongoRunner();
     }
 
     @Bean
-    @ConditionalOnClass(DataSource.class)
+    @ConditionalOnMissingBean
+    @ConditionalOnClass(name = "javax.sql.DataSource")
     public IMysqlRunner mysqlRunner(){
         return new DefaultMysqlRunner();
     }
