@@ -6,6 +6,11 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @date 2019-08-07
+ * @author lorne
+ * @param <T> bean泛型
+ */
 @Data
 public class XmlInfo<T> {
 

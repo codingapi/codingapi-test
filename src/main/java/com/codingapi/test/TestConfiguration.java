@@ -60,12 +60,12 @@ public class TestConfiguration {
 
     @Configuration
     @ConditionalOnClass(name = "javax.sql.DataSource")
-    class MysqlRunnerAutoConfiguration{
+    class RelationalDbRunnerAutoConfiguration{
 
         @Bean
         @ConditionalOnMissingBean
-        public IMysqlRunner mysqlRunner(){
-            return new DefaultMysqlRunner();
+        public IRelationalDbRunner relationalDbRunner(){
+            return new DefaultRelationalDbRunner();
         }
     }
 

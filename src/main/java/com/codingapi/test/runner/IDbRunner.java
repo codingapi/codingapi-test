@@ -6,7 +6,6 @@ import com.codingapi.test.annotation.TestMethod;
 import com.codingapi.test.xml.XmlInfo;
 import org.springframework.context.ApplicationContext;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import java.util.Map;
 public interface IDbRunner {
 
     <T> void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo) throws Exception;
-
 
     void clear(ApplicationContext applicationContext,TestMethod testMethod) throws Exception;
 
@@ -36,25 +34,8 @@ public interface IDbRunner {
                 map =  (Map<String,Object>) JSON.toJSON(val);
             }
             Object mval = map.get(expected.key());
-            if(expected.type().equals(Expected.Type.Integer)){
-                Integer _val = (Integer)mval;
-                if(Integer.parseInt(expected.value()) != _val){
-                    throw new IllegalAccessException(desc);
-                }
-            }
-
-            if(expected.type().equals(Expected.Type.String)){
-                String _val = (String)mval;
-                if(!expected.value().equals(_val)){
-                    throw new IllegalAccessException(desc);
-                }
-            }
-
-            if(expected.type().equals(Expected.Type.Long)){
-                Long _val = (Long)mval;
-                if(Long.parseLong(expected.value())!=_val){
-                    throw new IllegalAccessException(desc);
-                }
+            if(!mval.toString().equals(expected.value())){
+                throw new IllegalAccessException(desc);
             }
         }
     }

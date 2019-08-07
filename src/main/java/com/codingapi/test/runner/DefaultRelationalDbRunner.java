@@ -1,7 +1,6 @@
 package com.codingapi.test.runner;
 
 import com.codingapi.test.annotation.CheckMysqlData;
-import com.codingapi.test.annotation.DBType;
 import com.codingapi.test.annotation.Expected;
 import com.codingapi.test.annotation.TestMethod;
 import com.codingapi.test.utils.SqlUtils;
@@ -23,20 +22,17 @@ import java.util.Map;
  * @description
  */
 @Slf4j
-public class DefaultMysqlRunner implements IMysqlRunner {
+public class DefaultRelationalDbRunner implements IRelationalDbRunner {
 
 
     @Override
     public <T> void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo) throws SQLException {
-        if(xmlInfo.getDbType().equals(DBType.Mysql)){
-            DataSource dataSource = applicationContext.getBean(DataSource.class);
-            QueryRunner queryRunner = new QueryRunner();
-            for(Object object : xmlInfo.getList()) {
-                SqlUtils.SqlParam sqlParam = SqlUtils.parser(xmlInfo.getInitCmd(),object);
-                Object rows = queryRunner.insert(dataSource.getConnection(), sqlParam.getSql(),new ScalarHandler<>(),sqlParam.getParams());
-                log.info("mysql->{},rows:{}",sqlParam.getSql(),rows);
-            }
-
+        DataSource dataSource = applicationContext.getBean(DataSource.class);
+        QueryRunner queryRunner = new QueryRunner();
+        for(Object object : xmlInfo.getList()) {
+            SqlUtils.SqlParam sqlParam = SqlUtils.parser(xmlInfo.getInitCmd(),object);
+            Object rows = queryRunner.insert(dataSource.getConnection(), sqlParam.getSql(),new ScalarHandler<>(),sqlParam.getParams());
+            log.info("mysql->{},rows:{}",sqlParam.getSql(),rows);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.codingapi.test.runner;
 
+import com.codingapi.test.annotation.DBType;
 import com.codingapi.test.annotation.TestMethod;
 import com.codingapi.test.config.TestConfig;
 import com.codingapi.test.xml.XmlInfo;
@@ -31,22 +32,26 @@ public class DefaultTestPrepare implements ITestPrepare {
                 String xml = FileUtils.readFileToString(new File(path+"/"+xmlFile));
                 XmlInfo<T> xmlInfo = XmlUtils.parser(xml);
 
-                try {
-                    IMysqlRunner mysqlRunner = applicationContext.getBean(IMysqlRunner.class);
-                    if (mysqlRunner != null) {
-                        mysqlRunner.prepare(applicationContext, xmlInfo);
+                if(xmlInfo.getDbType().equals(DBType.RELATIONAL)) {
+                    try {
+                        IRelationalDbRunner relationalDbRunner = applicationContext.getBean(IRelationalDbRunner.class);
+                        if (relationalDbRunner != null) {
+                            relationalDbRunner.prepare(applicationContext, xmlInfo);
+                        }
+                    } catch (NoSuchBeanDefinitionException e) {
+                        log.warn("no relational prepare runner ");
                     }
-                }catch (NoSuchBeanDefinitionException e){
-                    log.warn("no mysql prepare runner ");
                 }
 
-                try {
-                    IMongoRunner mongoRunner = applicationContext.getBean(IMongoRunner.class);
-                    if (mongoRunner != null) {
-                        mongoRunner.prepare(applicationContext, xmlInfo);
+                if(xmlInfo.getDbType().equals(DBType.MONGODB)) {
+                    try {
+                        IMongoRunner mongoRunner = applicationContext.getBean(IMongoRunner.class);
+                        if (mongoRunner != null) {
+                            mongoRunner.prepare(applicationContext, xmlInfo);
+                        }
+                    } catch (NoSuchBeanDefinitionException e) {
+                        log.warn("no mongo prepare runner ");
                     }
-                }catch (NoSuchBeanDefinitionException e){
-                    log.warn("no mongo prepare runner ");
                 }
 
             }

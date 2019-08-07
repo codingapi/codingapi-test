@@ -52,8 +52,8 @@ public class XmlBuildRunner implements CommandLineRunner {
             xmlInfo.setDbType(xmlBuild.dbType());
 
             if(StringUtils.isEmpty(xmlBuild.initCmd())
-                    &&xmlBuild.dbType().equals(DBType.Mysql)){
-                String sql = SqlUtils.createInsertSql(xmlBuild.name(),clazz);
+                    &&xmlBuild.dbType().equals(DBType.RELATIONAL)){
+                String sql = SqlUtils.createInsertSql(xmlBuild.name(),xmlBuild.colType(),clazz);
                 xmlInfo.setInitCmd(sql);
             }else{
                 xmlInfo.setInitCmd(xmlBuild.initCmd());

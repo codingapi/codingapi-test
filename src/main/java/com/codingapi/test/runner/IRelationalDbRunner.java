@@ -5,7 +5,7 @@ package com.codingapi.test.runner;
  * @date 2019/8/7
  * @description
  */
-public interface IMysqlRunner extends IDbRunner{
+public interface IRelationalDbRunner extends IDbRunner{
 
 
 }

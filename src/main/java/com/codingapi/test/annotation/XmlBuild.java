@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * @author lorne
  * @date 2019/8/1
- * @description
+ * @description xml创建注解
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -26,10 +26,10 @@ public @interface XmlBuild {
 
 
     /**
-     * 数据库类型 目前支持mysql和mongo
-     * @return mysql or mongo
+     * 数据库类型 目前支持关系数据库和mongo
+     * @return 关系数据库 or mongo
      */
-    DBType dbType() default DBType.Mysql;
+    DBType dbType() default DBType.RELATIONAL;
 
 
     /**
@@ -37,6 +37,28 @@ public @interface XmlBuild {
      * @return demo
      */
     String name();
+
+    /**
+     * 插入语句字段格式类型
+     * @return 字段格式类型
+     */
+    ColType colType() default ColType.UNDERLINE;
+
+
+    enum ColType {
+
+        /**
+         * 驼峰
+         * helloWorld
+         */
+        CAMEL,
+        /**
+         * hello_world
+         * 下划线
+         */
+        UNDERLINE
+
+    }
 
 
 

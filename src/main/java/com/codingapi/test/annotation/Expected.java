@@ -25,14 +25,4 @@ public @interface Expected {
      * @return 值
      */
     String value() default "";
-
-    /**
-     * 值的类型 分为字符串和数字
-     * @return 值类型
-     */
-    Type type();
-
-    enum Type{
-        Integer,String,Long
-    }
 }

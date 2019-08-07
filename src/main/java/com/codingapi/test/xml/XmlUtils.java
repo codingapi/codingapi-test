@@ -14,6 +14,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * @date 2019-08-07
+ * @author lorne
+ */
 public class XmlUtils {
 
     public static <T> String create(XmlInfo xmlInfo) throws JsonProcessingException {

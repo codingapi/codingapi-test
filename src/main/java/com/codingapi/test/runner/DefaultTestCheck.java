@@ -18,12 +18,12 @@ public class DefaultTestCheck implements ITestCheck {
     public <T> void check(TestMethod testMethod, TestContext testContext) throws Exception {
         ApplicationContext applicationContext = testContext.getApplicationContext();
         try {
-            IMysqlRunner mysqlRunner = applicationContext.getBean(IMysqlRunner.class);
+            IRelationalDbRunner mysqlRunner = applicationContext.getBean(IRelationalDbRunner.class);
             if (mysqlRunner != null) {
                 mysqlRunner.check(applicationContext, testMethod);
             }
         }catch (NoSuchBeanDefinitionException e){
-            log.warn("no mysql check runner.");
+            log.warn("no relational check runner.");
         }
 
         try {

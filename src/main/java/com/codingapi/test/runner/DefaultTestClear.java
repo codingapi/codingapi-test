@@ -18,12 +18,12 @@ public class DefaultTestClear implements ITestClear {
     public <T> void clean(TestMethod testMethod, TestContext testContext) throws Exception {
         ApplicationContext applicationContext = testContext.getApplicationContext();
         try {
-            IMysqlRunner mysqlRunner = applicationContext.getBean(IMysqlRunner.class);
+            IRelationalDbRunner mysqlRunner = applicationContext.getBean(IRelationalDbRunner.class);
             if (mysqlRunner != null) {
                 mysqlRunner.clear(applicationContext, testMethod);
             }
         }catch (NoSuchBeanDefinitionException e){
-            log.warn("no mysql clean runner.");
+            log.warn("no relational clean runner.");
         }
 
         try {

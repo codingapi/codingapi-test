@@ -1,7 +1,6 @@
 package com.codingapi.test.runner;
 
 import com.codingapi.test.annotation.CheckMongoData;
-import com.codingapi.test.annotation.DBType;
 import com.codingapi.test.annotation.Expected;
 import com.codingapi.test.annotation.TestMethod;
 import com.codingapi.test.xml.XmlInfo;
@@ -25,13 +24,10 @@ public class DefaultMongoRunner implements IMongoRunner {
 
     @Override
     public <T> void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo){
-        if(xmlInfo.getDbType().equals(DBType.Mongo)){
-            MongoTemplate mongoTemplate = applicationContext.getBean(MongoTemplate.class);
-            for(Object object : xmlInfo.getList()) {
-                Object res = mongoTemplate.save(object,xmlInfo.getName());
-                log.info("mongodb->,rows:{}",res);
-            }
-
+        MongoTemplate mongoTemplate = applicationContext.getBean(MongoTemplate.class);
+        for(Object object : xmlInfo.getList()) {
+            Object res = mongoTemplate.save(object,xmlInfo.getName());
+            log.info("mongodb->,rows:{}",res);
         }
     }
 
@@ -53,11 +49,11 @@ public class DefaultMongoRunner implements IMongoRunner {
             String key = checkMongoData.primaryKey();
             String val = checkMongoData.primaryVal();
             Object pkval = val;
-            if(checkMongoData.type().equals(CheckMongoData.Type.Integer)){
+            if(checkMongoData.type().equals(CheckMongoData.Type.INTEGER)){
                 pkval = Integer.parseInt(val);
             }
 
-            if(checkMongoData.type().equals(CheckMongoData.Type.Long)){
+            if(checkMongoData.type().equals(CheckMongoData.Type.LONG)){
                 pkval = Long.parseLong(val);
             }
 

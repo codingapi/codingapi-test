@@ -30,7 +30,7 @@ public @interface CheckMongoData {
      * 值类型
      * @return 分为字符串和整数
      */
-    Type type();
+    Type type() default Type.STRING;
 
     /**
      * 异常提示的信息
@@ -57,7 +57,7 @@ public @interface CheckMongoData {
     Expected[] expected() default {};
 
     enum Type{
-        Integer,String,Long
+        INTEGER,STRING,LONG
     }
 
 }
