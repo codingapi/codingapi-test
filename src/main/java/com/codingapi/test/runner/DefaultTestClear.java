@@ -2,6 +2,7 @@ package com.codingapi.test.runner;
 
 import com.codingapi.test.annotation.TestMethod;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 
@@ -21,7 +22,7 @@ public class DefaultTestClear implements ITestClear {
             if (mysqlRunner != null) {
                 mysqlRunner.clear(applicationContext, testMethod);
             }
-        }catch (Exception e){
+        }catch (NoSuchBeanDefinitionException e){
             log.warn("no mysql clean runner.");
         }
 
@@ -30,7 +31,7 @@ public class DefaultTestClear implements ITestClear {
             if (mongoRunner != null) {
                 mongoRunner.clear(applicationContext, testMethod);
             }
-        }catch (Exception e){
+        }catch (NoSuchBeanDefinitionException e){
             log.warn("no mongo clean runner.");
         }
     }

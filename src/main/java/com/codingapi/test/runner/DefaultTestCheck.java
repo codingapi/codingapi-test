@@ -2,6 +2,7 @@ package com.codingapi.test.runner;
 
 import com.codingapi.test.annotation.TestMethod;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 
@@ -21,7 +22,7 @@ public class DefaultTestCheck implements ITestCheck {
             if (mysqlRunner != null) {
                 mysqlRunner.check(applicationContext, testMethod);
             }
-        }catch (Exception e){
+        }catch (NoSuchBeanDefinitionException e){
             log.warn("no mysql check runner.");
         }
 
@@ -30,7 +31,7 @@ public class DefaultTestCheck implements ITestCheck {
             if (mongoRunner != null) {
                 mongoRunner.check(applicationContext, testMethod);
             }
-        }catch (Exception e){
+        }catch (NoSuchBeanDefinitionException e){
             log.warn("no mongo check runner.");
         }
     }

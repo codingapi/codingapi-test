@@ -6,6 +6,7 @@ import com.codingapi.test.xml.XmlInfo;
 import com.codingapi.test.xml.XmlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 
@@ -35,7 +36,7 @@ public class DefaultTestPrepare implements ITestPrepare {
                     if (mysqlRunner != null) {
                         mysqlRunner.prepare(applicationContext, xmlInfo);
                     }
-                }catch (Exception e){
+                }catch (NoSuchBeanDefinitionException e){
                     log.warn("no mysql prepare runner ");
                 }
 
@@ -44,7 +45,7 @@ public class DefaultTestPrepare implements ITestPrepare {
                     if (mongoRunner != null) {
                         mongoRunner.prepare(applicationContext, xmlInfo);
                     }
-                }catch (Exception e){
+                }catch (NoSuchBeanDefinitionException e){
                     log.warn("no mongo prepare runner ");
                 }
 

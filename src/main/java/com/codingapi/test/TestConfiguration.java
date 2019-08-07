@@ -46,18 +46,27 @@ public class TestConfiguration {
     }
 
 
-    @Bean
-    @ConditionalOnMissingBean
+    @Configuration
     @ConditionalOnClass(name = "org.springframework.data.mongodb.core.MongoTemplate")
-    public IMongoRunner mongoRunner(){
-        return new DefaultMongoRunner();
+    class MongoRunnerAutoConfiguration{
+        @Bean
+        @ConditionalOnMissingBean
+        public IMongoRunner mongoRunner(){
+            return new DefaultMongoRunner();
+        }
     }
 
-    @Bean
-    @ConditionalOnMissingBean
+
+
+    @Configuration
     @ConditionalOnClass(name = "javax.sql.DataSource")
-    public IMysqlRunner mysqlRunner(){
-        return new DefaultMysqlRunner();
+    class MysqlRunnerAutoConfiguration{
+
+        @Bean
+        @ConditionalOnMissingBean
+        public IMysqlRunner mysqlRunner(){
+            return new DefaultMysqlRunner();
+        }
     }
 
 }
