@@ -30,7 +30,7 @@
             </activation>
         </profile>
 
-        <profile>
+               <profile>
             <id>coding-api</id>
             <properties>
                 <env>coding-api</env>
@@ -60,9 +60,9 @@
         </profile>
 
         <profile>
-            <id>prd</id>
+            <id>travis</id>
             <properties>
-                <env>prd</env>
+                <env>travis</env>
             </properties>
         </profile>
 
