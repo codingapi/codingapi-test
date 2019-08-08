@@ -23,7 +23,7 @@ public class DefaultMongoRunner implements IMongoRunner {
 
 
     @Override
-    public <T> void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo){
+    public void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo){
         MongoTemplate mongoTemplate = applicationContext.getBean(MongoTemplate.class);
         for(Object object : xmlInfo.getList()) {
             Object res = mongoTemplate.save(object,xmlInfo.getName());

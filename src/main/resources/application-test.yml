@@ -1,0 +1,4 @@
+codingapi:
+  test:
+    mode: createandcover
+    out-path: ${user.dir}\xml

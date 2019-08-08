@@ -26,7 +26,7 @@ public class DefaultRelationalDbRunner implements IRelationalDbRunner {
 
 
     @Override
-    public <T> void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo) throws SQLException {
+    public void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo) throws SQLException {
         DataSource dataSource = applicationContext.getBean(DataSource.class);
         QueryRunner queryRunner = new QueryRunner();
         for(Object object : xmlInfo.getList()) {

@@ -10,6 +10,6 @@ import org.springframework.test.context.TestContext;
  */
 public interface ITestPrepare {
 
-    <T> void prepare(TestMethod testMethod, TestContext testContext) throws Exception;
+     void prepare(TestMethod testMethod, TestContext testContext) throws Exception;
 
 }

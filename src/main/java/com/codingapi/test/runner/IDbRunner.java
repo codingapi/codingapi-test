@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface IDbRunner {
 
-    <T> void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo) throws Exception;
+    void prepare(ApplicationContext applicationContext, XmlInfo xmlInfo) throws Exception;
 
     void clear(ApplicationContext applicationContext,TestMethod testMethod) throws Exception;
 

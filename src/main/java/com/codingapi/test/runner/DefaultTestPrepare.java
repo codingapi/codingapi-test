@@ -23,14 +23,14 @@ public class DefaultTestPrepare implements ITestPrepare {
 
 
     @Override
-    public <T> void prepare(TestMethod testMethod, TestContext testContext) throws Exception {
+    public void prepare(TestMethod testMethod, TestContext testContext) throws Exception {
         ApplicationContext applicationContext = testContext.getApplicationContext();
         TestConfig testConfig = applicationContext.getBean(TestConfig.class);
         String path =  testConfig.getOutPath();
         if(testMethod.prepareData().length>0){
             for(String xmlFile:testMethod.prepareData()){
                 String xml = FileUtils.readFileToString(new File(path+"/"+xmlFile));
-                XmlInfo<T> xmlInfo = XmlUtils.parser(xml);
+                XmlInfo xmlInfo = XmlUtils.parser(xml);
 
                 if(xmlInfo.getDbType().equals(DBType.RELATIONAL)) {
                     try {

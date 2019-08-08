@@ -1,0 +1,21 @@
+<XmlInfo>
+    <!--表名称 -->
+    <name>t_demo</name>
+    <!--插入语句自动创建的 -->
+    <initCmd>insert into t_demo(id,name) values(#{id},#{name})</initCmd>
+    <!--数据库类型  MONGODB RELATIONAL-->
+    <dbType>RELATIONAL</dbType>
+    <!--entity所在类 -->
+    <className>com.codingapi.demo.domain.Demo</className>
+    <list>
+        <!--数据 -->
+        <list>
+            <id>1</id>
+            <name>123</name>
+        </list>
+        <list>
+            <id>1</id>
+            <name>123</name>
+        </list>
+    </list>
+</XmlInfo>
