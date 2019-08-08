@@ -18,6 +18,46 @@
     <artifactId>codingapi-test</artifactId>
     <version>0.0.2</version>
 
+
+    <profiles>
+        <profile>
+            <id>coding-api</id>
+            <properties>
+                <repository.id>Releases</repository.id>
+                <repository.name>Team Nexus Repository</repository.name>
+                <repository.url>http://ui.api:8081/repository/maven-releases/</repository.url>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <configuration>
+                            <attach>true</attach>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <env>prd</env>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
 
         <dependency>
@@ -95,5 +135,14 @@
 
 
     </dependencies>
+
+
+    <distributionManagement>
+        <repository>
+            <id>${repository.id}</id>
+            <url>${repository.url}</url>
+        </repository>
+    </distributionManagement>
+
 
 </project>
