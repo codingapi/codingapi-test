@@ -7,9 +7,6 @@ branches:
   - master
 
 
-before_install:
-- pip install --user codecov
-
 script:
 - ./mvnw clean install -DskipTests=false -P travis
 
