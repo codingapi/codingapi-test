@@ -1,4 +1,4 @@
-package com.codingapi.demo.domain;
+package com.codingapi.test.runner;
 
 import lombok.Data;
 

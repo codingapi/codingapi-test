@@ -6,7 +6,7 @@
     <!--数据库类型  MONGODB RELATIONAL-->
     <dbType>RELATIONAL</dbType>
     <!--entity所在类 -->
-    <className>com.codingapi.demo.domain.Demo</className>
+    <className>com.codingapi.test.runner.Demo</className>
     <list>
         <!--数据 -->
         <list>
