@@ -21,15 +21,23 @@
 
     <profiles>
         <profile>
-            <id>coding-api</id>
+            <id>local-dev</id>
             <properties>
-                <repository.id>Releases</repository.id>
-                <repository.name>Team Nexus Repository</repository.name>
-                <repository.url>http://ui.api:8081/repository/maven-releases/</repository.url>
+                <env>dev</env>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+        </profile>
+
+        <profile>
+            <id>coding-api</id>
+            <properties>
+                <env>coding-api</env>
+                <repository.id>Releases</repository.id>
+                <repository.name>Team Nexus Repository</repository.name>
+                <repository.url>http://ui.api:8081/repository/maven-releases/</repository.url>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -50,12 +58,14 @@
                 </plugins>
             </build>
         </profile>
+
         <profile>
             <id>prd</id>
             <properties>
                 <env>prd</env>
             </properties>
         </profile>
+
     </profiles>
 
     <dependencies>
