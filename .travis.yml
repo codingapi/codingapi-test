@@ -6,8 +6,8 @@ branches:
   only:
   - master
 
-before_install:
-- pip install --user codecov
+#before_install:
+#- pip install --user codecov
 
 script:
 - mvn cobertura:cobertura -P travis

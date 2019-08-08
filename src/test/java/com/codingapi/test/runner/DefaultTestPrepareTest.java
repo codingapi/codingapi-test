@@ -35,7 +35,7 @@ public class DefaultTestPrepareTest {
     @Before
     public void before(){
         TestConfig testConfig = new TestConfig();
-        testConfig.setOutPath(System.getProperty("user.dir")+"\\src\\test\\resources\\xml\\");
+        testConfig.setOutPath(System.getProperty("user.dir")+"/src/test/resources/xml/");
         when(applicationContext.getBean(TestConfig.class)).thenReturn(testConfig);
         when(testContext.getApplicationContext()).thenReturn(applicationContext);
         when(testMethod.prepareData()).thenReturn(new String[]{"demo.xml"});
