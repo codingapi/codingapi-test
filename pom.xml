@@ -20,81 +20,10 @@
     <artifactId>codingapi-test</artifactId>
     <version>0.0.2</version>
 
+    <name>codingapi-test</name>
+    <url>https://github.com/codingapi/codingapi-test</url>
+    <description>codingapi-test</description>
 
-    <profiles>
-        <profile>
-            <id>local-dev</id>
-            <properties>
-                <env>dev</env>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>coding-api</id>
-            <properties>
-                <env>coding-api</env>
-                <repository.id>Releases</repository.id>
-                <repository.name>Team Nexus Repository</repository.name>
-                <repository.url>http://ui.api:8081/repository/maven-releases/</repository.url>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <configuration>
-                            <attach>true</attach>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>travis</id>
-            <properties>
-                <env>travis</env>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <!-- for codecov.io -->
-                        <!-- config example: https://github.com/codecov/example-java -->
-                        <!-- plugin docs: http://eclemma.org/jacoco/trunk/doc/ -->
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.4</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>report</id>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>report</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
 
     <dependencies>
 
@@ -198,8 +127,176 @@
             <scope>test</scope>
         </dependency>
 
-
     </dependencies>
+
+
+
+    <profiles>
+        <profile>
+            <id>local-dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>ossrh</id>
+
+            <properties>
+                <repository.id>ossrh</repository.id>
+                <repository.name>Maven Central Staging Repository</repository.name>
+                <repository.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</repository.url>
+
+                <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+                <nexus.staging.maven.plugin>1.6.3</nexus.staging.maven.plugin>
+                <maven.compile.source>1.8</maven.compile.source>
+                <maven.compile.target>1.8</maven.compile.target>
+                <maven.source.plugin>3.0.1</maven.source.plugin>
+                <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+                <maven.javadoc.plugin>2.10.3</maven.javadoc.plugin>
+                <maven.gpg.plugin>1.6</maven.gpg.plugin>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>${maven.compile.source}</source>
+                            <target>${maven.compile.target}</target>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <compilerArgument>-Xlint:deprecation</compilerArgument>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven.source.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.staging.maven.plugin}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+
+
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven.javadoc.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven.gpg.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>coding-api</id>
+            <properties>
+                <env>coding-api</env>
+                <repository.id>Releases</repository.id>
+                <repository.name>Team Nexus Repository</repository.name>
+                <repository.url>http://ui.api:8081/repository/maven-releases/</repository.url>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <configuration>
+                            <attach>true</attach>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>travis</id>
+            <properties>
+                <env>travis</env>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- for codecov.io -->
+                        <!-- config example: https://github.com/codecov/example-java -->
+                        <!-- plugin docs: http://eclemma.org/jacoco/trunk/doc/ -->
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.4</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 
 
     <distributionManagement>
@@ -209,5 +306,31 @@
         </repository>
     </distributionManagement>
 
+
+    <scm>
+        <connection>scm:git:https://github.com/codingapi/codingapi-test.git</connection>
+        <developerConnection>scm:git:https://github.com/codingapi/codingapi-test.git</developerConnection>
+        <url>https://github.com/codingapi/codingapi-test</url>
+        <tag>v${project.version}</tag>
+    </scm>
+
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>wangliang</name>
+            <email>wangliang@codingapi.com</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 
 </project>

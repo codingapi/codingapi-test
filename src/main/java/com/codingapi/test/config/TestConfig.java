@@ -5,9 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
 /**
- * @author lorne
- * @date 2019/8/1
- * @description
+ * @author lorne 2019/8/1
  */
 @Data
 @ConfigurationProperties("codingapi.test")

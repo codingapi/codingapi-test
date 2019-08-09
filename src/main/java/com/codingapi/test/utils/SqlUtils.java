@@ -13,8 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @date 2019-08-07
- * @author lorne
+ * @author lorne 2019-08-07
  */
 public class SqlUtils {
 

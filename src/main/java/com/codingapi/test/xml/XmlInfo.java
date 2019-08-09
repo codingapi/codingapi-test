@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @date 2019-08-07
- * @author lorne
+ * @author lorne 2019-08-07
  * @param <T> bean泛型
  */
 @Data

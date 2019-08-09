@@ -13,9 +13,7 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
 import java.lang.reflect.Method;
 
 /**
- * @author lorne
- * @date 2019/8/1
- * @description
+ * @author lorne 2019/8/1
  */
 @Slf4j
 public class JunitMethodListener extends AbstractTestExecutionListener {

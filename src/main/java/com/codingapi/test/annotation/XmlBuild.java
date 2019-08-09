@@ -8,9 +8,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author lorne
- * @date 2019/8/1
- * @description xml创建注解
+ * xml创建注解
+ * @author lorne 2019/8/1
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

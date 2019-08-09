@@ -7,8 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 
 /**
- * @author lorne
- * @date 2019/8/6
+ * @author lorne 2019/8/6
  *
  */
 @Slf4j

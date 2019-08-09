@@ -14,9 +14,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
- * @author lorne
- * @date 2019/8/7
- * @description
+ * @author lorne 2019/8/7
  */
 @Slf4j
 public class DefaultMongoRunner implements IMongoRunner {

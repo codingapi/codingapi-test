@@ -4,9 +4,7 @@ import com.codingapi.test.annotation.TestMethod;
 import org.springframework.test.context.TestContext;
 
 /**
- * @author lorne
- * @date 2019/8/6
- * @description
+ * @author lorne 2019/8/6
  */
 public interface ITestClear {
 

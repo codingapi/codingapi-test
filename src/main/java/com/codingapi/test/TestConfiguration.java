@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 /**
- * @author lorne
- * @date 2019/8/1
- * @description
+ * @author lorne 2019/8/1
  */
 @ComponentScan
 @Configuration

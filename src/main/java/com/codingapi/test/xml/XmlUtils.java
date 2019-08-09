@@ -10,13 +10,13 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @date 2019-08-07
- * @author lorne
+ * @author lorne 2019-08-07
  */
 public class XmlUtils {
 
@@ -34,13 +34,13 @@ public class XmlUtils {
     }
 
 
-    public static <T> XmlInfo<T>  parser (String xml) throws IOException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static <T> XmlInfo<T>  parser (String xml) throws IOException, InvocationTargetException, IllegalAccessException, InstantiationException, ClassNotFoundException,NoSuchMethodException {
         XmlMapper xmlMapper = new XmlMapper();
         XmlInfo<LinkedHashMap<String,Object>> res = xmlMapper.readValue(xml,new TypeReference<XmlInfo<LinkedHashMap<String,Object>>>(){});
         return parser(res, (Class<T>) Class.forName(res.getClassName()));
     }
 
-    private static <T> XmlInfo<T> parser(XmlInfo<LinkedHashMap<String,Object>> res, Class<T> clazz) throws  InvocationTargetException, IllegalAccessException, InstantiationException {
+    private static <T> XmlInfo<T> parser(XmlInfo<LinkedHashMap<String,Object>> res, Class<T> clazz) throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         XmlInfo<T> xmlInfo = new XmlInfo<>();
         BeanUtils.copyProperty(xmlInfo,"initCmd",res.getInitCmd());
         BeanUtils.copyProperty(xmlInfo,"dbType",res.getDbType());
@@ -48,7 +48,7 @@ public class XmlUtils {
         BeanUtils.copyProperty(xmlInfo,"className",res.getClassName());
 
         for (Map<String,Object> map:res.getList()){
-            T t = clazz.newInstance();
+            T t = clazz.getDeclaredConstructor().newInstance();
             BeanUtils.populate(t,map);
             xmlInfo.getList().add(t);
         }

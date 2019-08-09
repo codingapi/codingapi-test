@@ -17,12 +17,11 @@ import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
 /**
- * @author lorne
- * @date 2019/8/1
- * @description
+ * @author lorne  2019/8/1
  */
 @Component
 @ConditionalOnProperty(name = "codingapi.test.mode")
@@ -33,7 +32,7 @@ public class XmlBuildRunner implements CommandLineRunner {
     private TestConfig testConfig;
 
     @Override
-    public void run(String... args) throws IOException, IllegalAccessException, InstantiationException {
+    public void run(String... args) throws IOException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         String outPath = testConfig.getOutPath();
         Iterable<Class<?>> annotated = ClassIndex.getAnnotated(XmlBuild.class);
         Iterator<Class<?>> iterator = annotated.iterator();
@@ -59,7 +58,7 @@ public class XmlBuildRunner implements CommandLineRunner {
                 xmlInfo.setInitCmd(xmlBuild.initCmd());
             }
 
-            Object obj = clazz.newInstance();
+            Object obj = clazz.getDeclaredConstructor().newInstance();
             xmlInfo.getList().add(obj);
 
             File file = new File(filePath);

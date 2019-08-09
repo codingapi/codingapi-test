@@ -14,9 +14,7 @@ import org.springframework.test.context.TestContext;
 import java.io.File;
 
 /**
- * @author lorne
- * @date 2019/8/6
- * @description
+ * @author lorne 2019/8/6
  */
 @Slf4j
 public class DefaultTestPrepare implements ITestPrepare {

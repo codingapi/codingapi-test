@@ -6,9 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author lorne
- * @date 2019/8/1
- * @description
+ * @author lorne 2019/8/1
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -46,7 +44,7 @@ public @interface CheckMongoData {
 
     /**
      * 检查的集合名词 默认可不行通过bean()获取
-     * @return
+     * @return collectionName
      */
     String collection() default "";
 

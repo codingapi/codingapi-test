@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author lorne
- * @date 2019/8/7
- * @description
+ * @author lorne 2019/8/7
  */
 public interface IDbRunner {
 
