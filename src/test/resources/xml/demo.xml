@@ -4,7 +4,7 @@
     <!--插入语句自动创建的 -->
     <initCmd>insert into t_demo(id,name) values(#{id},#{name})</initCmd>
     <!--数据库类型  MONGODB RELATIONAL-->
-    <dbType>RELATIONAL</dbType>
+    <dbType>MONGODB</dbType>
     <!--entity所在类 -->
     <className>com.codingapi.test.runner.Demo</className>
     <list>
