@@ -51,22 +51,6 @@ public class DefaultTestPrepare implements ITestPrepare {
                         log.warn("no mongo prepare runner ");
                     }
                 }
-
-                if (xmlInfo.getDbType().equals(DBType.MONGODB)) {
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                    System.out.println("123456789");
-                } else {
-                    System.out.println("123456789");
-                }
-
             }
         }
 
