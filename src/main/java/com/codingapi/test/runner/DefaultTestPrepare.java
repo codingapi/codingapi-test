@@ -24,13 +24,13 @@ public class DefaultTestPrepare implements ITestPrepare {
     public void prepare(TestMethod testMethod, TestContext testContext) throws Exception {
         ApplicationContext applicationContext = testContext.getApplicationContext();
         TestConfig testConfig = applicationContext.getBean(TestConfig.class);
-        String path =  testConfig.getOutPath();
-        if(testMethod.prepareData().length>0){
-            for(String xmlFile:testMethod.prepareData()){
-                String xml = FileUtils.readFileToString(new File(path+"/"+xmlFile));
+        String path = testConfig.getOutPath();
+        if (testMethod.prepareData().length > 0) {
+            for (String xmlFile : testMethod.prepareData()) {
+                String xml = FileUtils.readFileToString(new File(path + "/" + xmlFile));
                 XmlInfo xmlInfo = XmlUtils.parser(xml);
 
-                if(xmlInfo.getDbType().equals(DBType.RELATIONAL)) {
+                if (xmlInfo.getDbType().equals(DBType.RELATIONAL)) {
                     try {
                         IRelationalDbRunner relationalDbRunner = applicationContext.getBean(IRelationalDbRunner.class);
                         if (relationalDbRunner != null) {
@@ -41,7 +41,7 @@ public class DefaultTestPrepare implements ITestPrepare {
                     }
                 }
 
-                if(xmlInfo.getDbType().equals(DBType.MONGODB)) {
+                if (xmlInfo.getDbType().equals(DBType.MONGODB)) {
                     try {
                         IMongoRunner mongoRunner = applicationContext.getBean(IMongoRunner.class);
                         if (mongoRunner != null) {
@@ -52,7 +52,23 @@ public class DefaultTestPrepare implements ITestPrepare {
                     }
                 }
 
+                if (xmlInfo.getDbType().equals(DBType.MONGODB)) {
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                    System.out.println("123456789");
+                } else {
+                    System.out.println("123456789");
+                }
+
             }
         }
+
     }
 }
